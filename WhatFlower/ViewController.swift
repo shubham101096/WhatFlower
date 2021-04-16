@@ -12,18 +12,6 @@ import Alamofire
 import SwiftyJSON
 import SDWebImage
 
-struct Parameters: Encodable {
-    let format: String
-    let action: String
-    let prop: String
-    let exintro: String
-    let explaintext: String
-    var titles: String
-    let indexpageids: String
-    let redirects: String
-    let pithumbsize: String
-}
-
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
@@ -31,7 +19,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     private let imagePicker = UIImagePickerController()
     let url = "https://en.wikipedia.org/w/api.php"
-    var parameters = Parameters(format: "json", action: "query", prop: "extracts|pageimages", exintro: "", explaintext: "", titles: "", indexpageids: "", redirects: "1", pithumbsize: "500")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +56,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             if let result = results.first {
                 print(result)
                 self.navigationItem.title = result.identifier.capitalized
-                self.parameters.titles = result.identifier.capitalized
                 self.wikiRequest(flowerName: result.identifier.capitalized)
             } else {
                 self.navigationItem.title = "Not Detected"
@@ -87,7 +73,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func wikiRequest(flowerName: String) {
         
-        AF.request(self.url, method: .get, parameters: self.parameters).responseJSON { (response) in
+        let parameters : [String:String] = ["format" : "json", "action" : "query", "prop" : "extracts|pageimages", "exintro" : "", "explaintext" : "", "titles" : flowerName, "redirects" : "1", "pithumbsize" : "500", "indexpageids" : ""]
+
+        
+        AF.request(self.url, method: .get, parameters: parameters).responseJSON { (response) in
             if let success = try? response.result.get() {
                 let json = (JSON(success))
                 print(json)
