@@ -10,6 +10,7 @@ import CoreML
 import Vision
 import Alamofire
 import SwiftyJSON
+import SDWebImage
 
 struct Parameters: Encodable {
     let format: String
@@ -20,10 +21,8 @@ struct Parameters: Encodable {
     var titles: String
     let indexpageids: String
     let redirects: String
+    let pithumbsize: String
 }
-
-//let wikipediaURl = "https://en.wikipedia.org/w/api.php"
-//
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -32,7 +31,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     private let imagePicker = UIImagePickerController()
     let url = "https://en.wikipedia.org/w/api.php"
-    var parameters = Parameters(format: "json", action: "query", prop: "extracts", exintro: "", explaintext: "", titles: "", indexpageids: "", redirects: "1")
+    var parameters = Parameters(format: "json", action: "query", prop: "extracts|pageimages", exintro: "", explaintext: "", titles: "", indexpageids: "", redirects: "1", pithumbsize: "500")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +39,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.allowsEditing = true
         imagePicker.sourceType = .camera
         navigationItem.title = "What Flower"
+        textView.text = ""
+        imageView.image = nil
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -47,7 +48,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.dismiss(animated: true, completion: nil)
         
         if let userCapturedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            imageView.image = userCapturedImage
             guard let image = CIImage(image: userCapturedImage) else {
                 fatalError("Could not convert to ciimage")
             }
@@ -88,11 +88,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func wikiRequest(flowerName: String) {
         
         AF.request(self.url, method: .get, parameters: self.parameters).responseJSON { (response) in
-            print("Hi")
             if let success = try? response.result.get() {
                 let json = (JSON(success))
+                print(json)
                 if let pageid = json["query"]["pageids"][0].string {
                     self.textView.text = json["query"]["pages"][pageid]["extract"].string
+                    if let imageURL = json["query"]["pages"][pageid]["thumbnail"]["source"].string {
+                        self.imageView.sd_setImage(with: URL(string: imageURL), placeholderImage: .none)
+                    }
                 }
             }
         }

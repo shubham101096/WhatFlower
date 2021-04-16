@@ -19,7 +19,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YbP-9v-faB">
                                 <rect key="frame" x="20" y="108" width="374" height="287"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="287" id="tL1-Tx-OQg"/>
+                                    <constraint firstAttribute="width" secondItem="YbP-9v-faB" secondAttribute="height" multiplier="374:287" id="lOB-iK-Xmh"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U8r-FV-qCb">
@@ -34,13 +34,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="U8r-FV-qCb" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="3Xw-qj-D6Z"/>
-                            <constraint firstItem="YbP-9v-faB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Apm-6O-dME"/>
-                            <constraint firstItem="U8r-FV-qCb" firstAttribute="top" secondItem="YbP-9v-faB" secondAttribute="bottom" constant="20" id="J6K-c9-Udy"/>
-                            <constraint firstItem="YbP-9v-faB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Tx6-rZ-Tpd"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="U8r-FV-qCb" secondAttribute="trailing" constant="20" id="XTk-Rn-H25"/>
-                            <constraint firstItem="U8r-FV-qCb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="mgZ-Dw-3eh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YbP-9v-faB" secondAttribute="trailing" constant="20" id="mt0-dG-sLk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="U8r-FV-qCb" secondAttribute="trailing" constant="20" id="3Lc-vD-hhl"/>
+                            <constraint firstItem="YbP-9v-faB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="5MA-E0-pdF"/>
+                            <constraint firstItem="YbP-9v-faB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="9jv-A6-iMh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YbP-9v-faB" secondAttribute="trailing" constant="20" id="DhX-tu-iYI"/>
+                            <constraint firstItem="U8r-FV-qCb" firstAttribute="top" secondItem="YbP-9v-faB" secondAttribute="bottom" constant="20" id="JDi-aY-MeB"/>
+                            <constraint firstItem="U8r-FV-qCb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="VGO-lv-djz"/>
+                            <constraint firstItem="U8r-FV-qCb" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="hj1-es-P5h"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="WhatFlower" id="YpB-pv-tIe">
